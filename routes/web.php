@@ -3,19 +3,23 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    //return view('welcome');
-    return "
-    <h1>Halaman Home</h1>
-    <a href='/about'>About</a><br>
-    <a href='/profile'>Profile</a>
-    ";
+    return 'Halo Laravel';
+    return view('index');
 });
 
 Route::get('/about', function () {
-   // return view('welcome');
-    return "
-    <h1>Halaman Home</h1>
-    <a href='/Home'></a><br>
-    <a href='/profile'>Profile</a>
-    ";
+    return 'Ini adalah halaman <b>about</b>';
+    return view('about');
+});
+
+Route::get('/mahasiswa', function () {
+    return 'Ini adalah halaman <b>mahasiswa </b>';
+    return view('mahasiswa');
+});
+
+Route::get('/profile', function () {
+    $nama = 'Sherly Pitaloka';
+    return 'Ini adalah halaman <b>profile</b>, nama saya adalah ' . $nama;
+    // return view('profile', compact('nama'));
+    return view('profile')->with('nama', $nama);
 });
