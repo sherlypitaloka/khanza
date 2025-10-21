@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mahasiswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
     <style>
         .table-striped tbody tr.baris-baru {
             background-color: #000000 !important;
@@ -13,7 +14,7 @@
         .baris-baru td {
             background-color: #000000 !important;
             color: #ffffff !important;
-            border-color: #333333 !important;
+            border-color: #000000 !important;
         }
     </style>
 </head>
@@ -22,7 +23,7 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="https://uinsu.ac.id/wp-content/uploads/2022/08/Logo-UIN-SU-Medan-PNG-1.png" alt="Logo UIN" height="40" class="me-2">
-                
+            
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,7 +63,7 @@
         <h1 class="mb-4">Halaman Mahasiswa</h1>
         
         <div class="row">
-            <!-- Tabel di kiri -->
+           
             <div class="col-md-6">
                 <h3>Data Mahasiswa</h3>
                 <div class="table-responsive">
@@ -70,78 +71,73 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
                                 <th>NIM</th>
-                                <th>Alamat</th>
-                                <th>Prodi</th>
+                                <th>Nama</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Data akan muncul di sini -->
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Form di kanan -->
+           
             <div class="col-md-6">
-                <h3>Tambah Mahasiswa</h3>
+                <h3>Form Tambah Mahasiswa</h3>
                 <form id="formMahasiswa">
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" required>
-                    </div>
+
                     <div class="mb-3">
                         <label for="nim" class="form-label">NIM</label>
                         <input type="text" class="form-control" id="nim" placeholder="Masukkan NIM" required>
                     </div>
                     <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="alamat" rows="3" placeholder="Masukkan alamat" required></textarea>
+                        <label for="nama" class="form-label">Nama Mahasiswa</label>
+                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="prodi" class="form-label">Prodi</label>
-                        <input type="text" class="form-control" id="prodi" placeholder="Masukkan program studi" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Tambah Mahasiswa</button>
+                    <button type="submit" class="btn btn-primary w-100">Simpan</button>
                 </form>
             </div>
         </div>
     </div>
 
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script>
-        let nomor = 1;
+        $(document).ready(function() {
+            let nomor = 1;
 
-        document.getElementById('formMahasiswa').addEventListener('submit', function(e){
-            e.preventDefault(); // Supaya ga reload page
-
-            // Ambil value dari form
-            const nama = document.getElementById('nama').value;
-            const nim = document.getElementById('nim').value;
-            const alamat = document.getElementById('alamat').value;
-            const prodi = document.getElementById('prodi').value;
-
-            // Masukkan data ke tabel
-            const tabel = document.querySelector('#tabelMahasiswa tbody');
-            const baris = document.createElement('tr');
-            baris.className = 'baris-baru'; // Tambahkan class untuk styling
-            baris.innerHTML = `
-                <td>${nomor++}</td>
-                <td>${nama}</td>
-                <td>${nim}</td>
-                <td>${alamat}</td>
-                <td>${prodi}</td>
-            `;
-            tabel.appendChild(baris);
-
-            // Reset form
-            this.reset();
             
-            // Focus ke input nama untuk input berikutnya
-            document.getElementById('nama').focus();
+            $("#formMahasiswa").on("submit", function(e) {
+                e.preventDefault();
+
+                
+                let nim = $("#nim").val();
+                let nama = $("#nama").val();
+
+               
+                let baris = $(`
+                    <tr class="baris-baru" style="display:none;">
+                        <td>${nomor++}</td>
+                        <td>${nim}</td>
+                        <td>${nama}</td>
+                    </tr>
+                `);
+
+                
+                $("#tabelMahasiswa tbody").append(baris);
+                baris.fadeIn(400);
+
+               
+                $(this)[0].reset(); 
+                $("#nim").focus();
+            });
         });
     </script>
 
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz4YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
