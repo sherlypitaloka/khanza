@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Halaman Profile</h1>
-    <p>Nama saya adalah {{ $nama; }}</p>
+    <p>Nama saya adalah {{ $nama }}</p>
 </body>
 </html>
